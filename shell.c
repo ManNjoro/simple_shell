@@ -23,8 +23,10 @@ int main(int argc, char **argv, char **env)
 			args = tokenize(line);/** tokenizes or parse user input*/
 			if (!args)
 				free(line);
-			if (!_strcmp(args[0], "env"))/**checks if user wrote env"*/
+			if (!_strcmp(args[0], "env"))
 				_getenv(env);
+			if (strcmp(args[0], "exit") == 0)
+				exit(0);
 			else
 			{
 				is_path = value_path(&args[0], env);/** tokenizes PATH*/
