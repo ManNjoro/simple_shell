@@ -9,27 +9,25 @@
 int main(int argc, char **argv, char **env)
 {
 	int pathValue = 0, status = 0, is_path = 0;
-	char *line = NULL, /**ptr to inpt*/ **args = NULL; /**tokenized commands*/
+	char *line = NULL,  **args = NULL;
 	(void)argc;
-	while (1)/* loop until exit */
+	while (1)
 	{
 		errno = 0;
-		line = read_line();/** reads user input*/
+		line = read_line();
 		if (line == NULL && errno == 0)
 			return (0);
 		if (line)
 		{
 			pathValue++;
-			args = tokenize(line);/** tokenizes or parse user input*/
+			args = tokenize(line);
 			if (!args)
 				free(line);
 			if (!_strcmp(args[0], "env"))
 				_getenv(env);
-			if (strcmp(args[0], "exit") == 0)
-				exit(0);
 			else
 			{
-				is_path = value_path(&args[0], env);/** tokenizes PATH*/
+				is_path = value_path(&args[0], env);
 				status = _fork(args, argv, env, line, pathValue, is_path);
 				if (status == 200)
 				{
