@@ -8,7 +8,7 @@
  */
 int main(int argc, char **argv, char **env)
 {
-	int pathValue = 0, status = 0, is_path = 0;
+	int val = 0, status = 0, _path = 0;
 	char *line = NULL,  **args = NULL;
 	(void)argc;
 	while (1)
@@ -19,7 +19,7 @@ int main(int argc, char **argv, char **env)
 			return (0);
 		if (line)
 		{
-			pathValue++;
+			val++;
 			args = tokenize(line);
 			if (!args)
 				free(line);
@@ -27,14 +27,14 @@ int main(int argc, char **argv, char **env)
 				_getenv(env);
 			else
 			{
-				is_path = value_path(&args[0], env);
-				status = _fork(args, argv, env, line, pathValue, is_path);
+				_path = value_path(&args[0], env);
+				status = _fork(args, argv, env, line, val, _path);
 				if (status == 200)
 				{
 					free(line);
 					return (0);
 				}
-				if (is_path == 0)
+				if (_path == 0)
 					free(args[0]);
 			}
 			free(args);
