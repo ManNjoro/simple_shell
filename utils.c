@@ -1,100 +1,111 @@
 #include "shell.h"
 
 /**
- * _strcmp - compares two strings
- * @s1: the first string
- * @s2: the second string
+ * _strcat - concatenates two strings
  *
- * Return: 0 if the strings are equal, -1 otherwise
- */
-int _strcmp(char *s1, char *s2)
-{
-	int i;
-
-	for (i = 0; s1[i] && s2[i]; i++)
-	{
-		if (s1[i] != s2[i])
-			return (-1);
-	}
-	if (s1[i] || s2[i])
-		return (-1);
-
-	return (0);
-}
-
-/**
- * _strncmp - compares two strings up to n bytes
- * @s1: the first string
- * @s2: the second string
- * @n: the maximum number of bytes to compare
+ * @dest: Destination string
  *
- * Return: 0 if the strings are equal up to n bytes, -1 otherwise
+ * @src: Origin string
+ * Return: dest
  */
-int _strncmp(char *s1, char *s2, size_t n)
-{
-	size_t i;
 
-	for (i = 0; i < n && s1[i] && s2[i]; i++)
-	{
-		if (s1[i] != s2[i])
-			return (-1);
-	}
 
-	if (i != n && (s1[i] || s2[i]))
-		return (-1);
 
-	return (0);
-}
-
-/**
- * _strlen - Computes the length of a string.
- * @str: The input string.
- *
- * Return: The length of the string.
- */
-size_t _strlen(const char *str)
-{
-	size_t len = 0;
-
-	while (*str++)
-		len++;
-
-	return (len);
-}
-
-/**
- * _strcat - Concatenates two strings.
- * @dest: The destination string.
- * @src: The source string.
- *
- * Return: A pointer to the destination string.
- */
 char *_strcat(char *dest, char *src)
 {
-	size_t dest_len = _strlen(dest);
-	size_t i;
+	int i, j = 0;
 
-	for (i = 0; src[i] != '\0'; i++)
-		dest[dest_len + i] = src[i];
-
-	dest[dest_len + i] = '\0';
-
+	for (i = 0; dest[i] != '\0'; i++)
+	{
+	}
+	for (j = 0; src[j] != '\0'; j++)
+	{
+		dest[i] = src[j];
+		i++;
+	}
+	dest[i] = '\0';
 	return (dest);
 }
 
+
+
 /**
- * _strdup - Duplicates a string in memory.
- * @str: The input string.
+ * _strcmp - Compares two strings
  *
- * Return: A pointer to the duplicated string.
+ * @s1:  string 1
+ * @s2:  string 2
+ *
+ * Return: val
+ *
  */
-char *_strdup(const char *str)
+
+int _strcmp(char *s1, char *s2)
 {
-	size_t len = _strlen(str) + 1;
-	char *copy = malloc(len);
+	int i = 0;
+	int val;
 
-	if (copy == NULL)
-		return (NULL);
+	while (s1[i] != 0 && s2[i] != 0 && s1[i] == s2[i])
+		i++;
+	val = s1[i] - s2[i];
+	return (val);
+}
 
-	return ((char *) memcpy(copy, str, len));
+/**
+ * _strlen - gets the size of a string
+ * @s: the string to measure
+ * Return: the length of the string
+ */
+
+int _strlen(char *s)
+{
+	int i;
+
+	for (i = 0; s[i] != 0; i++)
+		;
+
+	return (i);
+}
+
+/**
+ *_strncmp -  function that compares two strings.
+ *@s1: string one
+ *@s2: string two
+ *@n: number of characters
+ * Return: diference
+ */
+
+size_t _strncmp(char *s1, char *s2, size_t n)
+{
+	size_t i, j;
+
+	for (j = 0; s1[j] != '\0' && j < n; j++)
+	{
+		i = s1[j] - s2[j];
+
+		if (i != 0)
+		{
+			return (i);
+		}
+	}
+	return (0);
+}
+
+/**
+ * _strcpy - copies the string pointed to by src into dest
+ * @dest: destination of the copy
+ * @src: source of the copy
+ *
+ * Return: dest
+ */
+
+char *_strcpy(char *dest, char *src)
+{
+	int i = 0;
+
+	for (i = 0; src[i] != '\0'; i++)
+	{
+		dest[i] = src[i];
+	}
+	dest[i + 1] = 0;
+	return (dest);
 }

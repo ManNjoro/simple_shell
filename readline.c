@@ -1,19 +1,22 @@
 #include "shell.h"
 /**
- * read_line - reads a line from stdin
- * Return: a pointer to the line, or NULL on failure
+ * read_line -  reads input
+ * Return: The input.
  */
+
 char *read_line(void)
 {
-	size_t bufsize = 0;
 	char *line = NULL;
+	size_t buffsize = 0;
 
-	if (getline(&line, &bufsize, stdin) == -1)
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "$ ", 2);
+
+	if (getline(&line, &buffsize, stdin) == -1)
 	{
-		perror("getline");
+		free(line);
 		return (NULL);
 	}
 
 	return (line);
 }
-

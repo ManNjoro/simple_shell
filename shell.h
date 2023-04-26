@@ -3,52 +3,35 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
-#include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <string.h>
+#include <sys/stat.h>
 #include <errno.h>
 
-void env_init(char **env);
-void add_var(char *str);
-int set_var(char *name, char *value);
-void print_prompt(void);
-int _strcmp(char *s1, char *s2);
-int _strncmp(char *s1, char *s2, size_t n);
-char *read_line(void);
-char **split_line(char *line);
-int execute(char **args);
-char **tokenize(char *str, char *delim);
-int launch(char **args);
-size_t _strlen(const char *str);
-char *_strcat(char *dest, char *src);
-char *_strdup(const char *str);
-char *_getcwd(void);
-int shell_exit(char **args);
+
+int shell_ctrld(char **args);
 int shell_cd(char **args);
-int (*get_builtin(char *cmd))(char **args);
-char *_getenv(char *name);
-void free_tokens(char **tokens);
-
-
-/* Global variables */
+int shell_help(char **args);
 extern char **environ;
-extern char *shell_name;
-extern char *shell_version;
-extern char **shell_builtins;
-extern int (*shell_builtin_funcs[])(char **);
-extern int shell_num_builtins;
+int shell_exit(char **argv);
+int _strcmp(char *s1, char *s2);
+size_t _strncmp(char *s1, char *s2, size_t n);
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
+int _putchar(char c);
 
-/**
- * struct built - struct type
- * @name : pointer to a string that represents the name of the built-in command
- * @func : function pointer
- */
-typedef struct built
-{
-	char *name;
-	int (*func)(char **args);
-} builtin;
-#endif
+char *get_path(char **env);
+int value_path(char **arg, char **env);
+char *_getline_command(void);
+char *read_line(void);
+void _getenv(char **env);
+char **tokenize(char *lptr);
+void _exit_command(char **args, char *lineptr, int _exit);
+int _fork(char **argc, char **argv, char **env,
+char *lineptr, int np, int c);
 
+
+#endif /* SHELL_H */
