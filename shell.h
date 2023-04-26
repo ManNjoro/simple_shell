@@ -37,6 +37,10 @@ char **tokenize(char *lptr);
 void _exit_command(char **args, char *lineptr, int _exit);
 int _fork(char **argc, char **argv, char **env,
 char *lineptr, int np, int c);
+int _setenv(char **args);
+int _unsetenv(char **args);
+void handle_setenv_command(char **args);
+void handle_unsetenv_command(char **args);
 
 
 #endif /* SHELL_H */

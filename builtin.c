@@ -5,11 +5,11 @@ int shell_help(char **args);
 int shell_exit(char **argv);
 int shell_ctrld(char **args);
 
-char *builtins[] = {"cd", "help", "exit", "^D"};
+char *builtins[] = {"cd", "help", "exit", "^D", "setenv", "unsetenv"};
 
 int (*builtin_func[]) (char **) = {
 	&shell_cd, &shell_help,
-	&shell_exit, &shell_ctrld};
+	&shell_exit, &shell_ctrld, &_setenv, &_unsetenv};
 
 /**
  * shell_exit - exits the shell
